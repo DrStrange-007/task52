@@ -1,0 +1,22 @@
+data = [
+    ["Row 1 Cell 1", "Row 1 Cell 2", "Row 1 Cell 3"],
+    ["Row 2 Cell 1", "Row 2 Cell 2", "Row 2 Cell 3"],
+    ["Row 3 Cell 1", "", ""]
+]
+
+headers = ["Column 1", "Column 2", "Column 3"]
+
+
+col_widths = [max(len(str(item)) for item in col) for col in zip(headers, *data)]
+
+
+header_row = " | ".join(f"{headers[i]:<{col_widths[i]}}" for i in range(len(headers)))
+separator_row = "-+-".join("-" * col_widths[i] for i in range(len(headers)))
+
+
+data_rows = "\n".join(" | ".join(f"{data[row][col]:<{col_widths[col]}}" for col in range(len(headers))) for row in range(len(data)))
+
+
+table = f"{header_row}\n{separator_row}\n{data_rows}"
+
+print(table)
